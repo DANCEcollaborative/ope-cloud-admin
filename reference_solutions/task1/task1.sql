@@ -1,0 +1,1 @@
+SELECT first_name, last_name, from_date, to_date from emp_salaries where salary > 100000;

@@ -1,0 +1,36 @@
+--- !Manifest
+course: f23-15619
+
+module: mysql-indexing
+
+sections:
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-indexing/000_introduction.md
+    title: Introduction
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-indexing/010_mysql_indexing.md
+    title: Single Column Index vs. Multi-column Composite Index
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-indexing/020_trade_offs.md
+    title:  What are the trade-offs?
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-indexing/030_indexes_and_join_queries.md
+    title: Indexes and JOIN Queries
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-indexing/040_key_takeaways.md
+    title: Key Takeaways
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-indexing/060_proof_of_completion.md
+    title: Proof of Completion

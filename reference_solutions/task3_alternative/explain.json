@@ -1,0 +1,113 @@
+{
+    "query_block": {
+        "select_id": 1,
+        "cost_info": {
+            "query_cost": "144395.90"
+        },
+        "nested_loop": [
+            {
+                "table": {
+                    "table_name": "tt",
+                    "access_type": "ref",
+                    "possible_keys": [
+                        "dept_index"
+                    ],
+                    "key": "dept_index",
+                    "used_key_parts": [
+                        "dept_name"
+                    ],
+                    "key_length": "162",
+                    "ref": [
+                        "const"
+                    ],
+                    "rows_examined_per_scan": 39836,
+                    "rows_produced_per_join": 39836,
+                    "filtered": "100.00",
+                    "cost_info": {
+                        "read_cost": "986.25",
+                        "eval_cost": "3983.60",
+                        "prefix_cost": "4969.85",
+                        "data_read_per_join": "12M"
+                    },
+                    "used_columns": [
+                        "emp_no",
+                        "first_name",
+                        "last_name",
+                        "dept_name"
+                    ]
+                }
+            },
+            {
+                "table": {
+                    "table_name": "s",
+                    "access_type": "ref",
+                    "possible_keys": [
+                        "<auto_key0>"
+                    ],
+                    "key": "<auto_key0>",
+                    "used_key_parts": [
+                        "emp_no"
+                    ],
+                    "key_length": "42",
+                    "ref": [
+                        "employees.tt.emp_no"
+                    ],
+                    "rows_examined_per_scan": 10,
+                    "rows_produced_per_join": 398360,
+                    "filtered": "100.00",
+                    "cost_info": {
+                        "read_cost": "99590.04",
+                        "eval_cost": "39836.01",
+                        "prefix_cost": "144395.90",
+                        "data_read_per_join": "21M"
+                    },
+                    "used_columns": [
+                        "emp_no",
+                        "avg_salary"
+                    ],
+                    "materialized_from_subquery": {
+                        "using_temporary_table": true,
+                        "dependent": false,
+                        "cacheable": true,
+                        "query_block": {
+                            "select_id": 2,
+                            "cost_info": {
+                                "query_cost": "289332.03"
+                            },
+                            "grouping_operation": {
+                                "using_filesort": false,
+                                "table": {
+                                    "table_name": "salaries",
+                                    "access_type": "index",
+                                    "possible_keys": [
+                                        "PRIMARY"
+                                    ],
+                                    "key": "PRIMARY",
+                                    "used_key_parts": [
+                                        "emp_no",
+                                        "from_date"
+                                    ],
+                                    "key_length": "45",
+                                    "rows_examined_per_scan": 2836291,
+                                    "rows_produced_per_join": 2836291,
+                                    "filtered": "100.00",
+                                    "cost_info": {
+                                        "read_cost": "5702.93",
+                                        "eval_cost": "283629.10",
+                                        "prefix_cost": "289332.03",
+                                        "data_read_per_join": "151M"
+                                    },
+                                    "used_columns": [
+                                        "emp_no",
+                                        "salary",
+                                        "from_date"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

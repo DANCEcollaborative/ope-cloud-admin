@@ -1,0 +1,36 @@
+--- !Manifest
+course: f23-15619
+
+module: mysql-data-types
+
+sections:
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-data-types/000_introduction.md
+    title: Introduction
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-data-types/010_char_vs_int.md
+    title: CHAR vs. INT
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-data-types/020_char_vs_varchar.md
+    title: CHAR vs. VARCHAR
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-data-types/030_json_text.md
+    title: JSON vs. TEXT
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-data-types/040_key_takeaways.md
+    title: Key Takeaways
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-mysql-data-types/050_proof_of_completion.md
+    title: Proof of Completion

@@ -1,0 +1,35 @@
+--- !Manifest
+course: f23-15619
+
+module: ope-phase-2
+
+sections:
+  - !Section
+    type: writeup
+    id:
+    file: writeup-ope/000_introduction.md
+    title: Introduction
+
+  - !Section
+    type: writeup
+    id:
+    file: writeup-ope/010_prequiz.md
+    title: Pre-OPE Quiz
+
+  - !Section
+    type: writeup
+    id:
+    file: writeup-ope/020_tutorial.md
+    title: Tutorial
+
+  - !Section
+    type: writeup
+    id:
+    file: writeup-ope/030_mysql_task.md
+    title: MySQl Tasks
+
+  - !Section
+    type: writeup
+    id:
+    file: writeup-ope/040_postquiz.md
+    title: Post-OPE Quiz

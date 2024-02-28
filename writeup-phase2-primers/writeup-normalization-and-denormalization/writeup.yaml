@@ -1,0 +1,26 @@
+--- !Manifest
+course: f23-15619
+
+module: normalization-and-denormalization
+
+sections:
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-normalization-and-denormalization/000_introduction.md
+    title: Introduction
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-normalization-and-denormalization/010_normalization_and_denormalization.md
+    title: Normalization vs. Denormalization
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-normalization-and-denormalization/020_key_takeaways.md
+    title: Key Takeaways
+  - !Section
+    type: writeup
+    id:
+    file: writeup-phase2-primers/writeup-normalization-and-denormalization/030_proof_of_completion.md
+    title: Proof of Completion

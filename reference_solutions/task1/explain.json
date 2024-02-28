@@ -1,0 +1,29 @@
+{
+    "query_block": {
+        "select_id": 1,
+        "cost_info": {
+            "query_cost": "294584.10"
+        },
+        "table": {
+            "table_name": "emp_salaries",
+            "access_type": "ALL",
+            "rows_examined_per_scan": 2837871,
+            "rows_produced_per_join": 945862,
+            "filtered": "33.33",
+            "cost_info": {
+                "read_cost": "199997.86",
+                "eval_cost": "94586.24",
+                "prefix_cost": "294584.10",
+                "data_read_per_join": "158M"
+            },
+            "used_columns": [
+                "salary",
+                "from_date",
+                "to_date",
+                "first_name",
+                "last_name"
+            ],
+            "attached_condition": "(`employees`.`emp_salaries`.`salary` > 100000)"
+        }
+    }
+}

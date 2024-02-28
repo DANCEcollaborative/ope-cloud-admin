@@ -1,0 +1,103 @@
+module:
+  # describe how to deploy the project and get it ready to release
+  # describe the source folder and howto of each project component
+  -title: ope-cloud-admin
+  -url: https://projects.sailplatform.org/f23-15619/ope-phase-2
+  -description: |
+  Optimize a database and provide efficient queries to meet the requirements of each use case.
+  Use MySQL data types, indexing, normalization and denormalization to optimize query performance.
+  -howto: |
+  To build and deploy the whole project ready to release, you need to get the following compontents ready
+  1. grading_server.py (Ensure proper syntax and calling into local grader for each task)
+  2. local_grader.py (Verify the mapping to call task specific tests)
+  3. taskTest.py (Ensure all required validations for each task is verified and the call to ope-grader.jar is returning proper results)
+  4. ope-grader.jar (verify the ope-grader.jar is placed in the grader folder)
+  5. task{N}.ipynb and workspace.ipynb (Create detailed problem statement description for each task)
+  6. Dockerfile (Ensure required libraries are installed and entrypoint starts grading server)
+  7. Writeup (including AssessMe and the associated primers)
+
+  # Each directory is described in detail below
+  # -src: the relative path from the root folder
+  # -howto: how to use this directory
+  grader:
+    -src: grader
+    -howto: |
+        Run "python3 grading_server.py" should start the server.
+  grading:
+    -src: grading
+    -howto: |
+      Backend gRPC code, do not modify anything
+  tasks:
+    -src: tasks
+    -howto: |
+      Run submit cells in each task{N}.ipynb (with grading_server.py running) to test grading.
+  workspace:
+    -src: workspace
+    -howto: |
+      Nothing to run, explain the purpose of the session clearly.
+  writeup-ope:
+    -src: writeup-ope
+    -howto: |
+    writeup:See https://github.com/sailplatform/SAIL-Manual/wiki/Writeup-HOWTO
+    adding google forms: https://github.com/CloudComputingCourse/writeups/wiki/Inserting-a-research-survey-in-a-Sail()-1.5-course
+  writeup-phase2-primers:
+    -src: writeup-phase2-primers
+    -howto: |
+       writeup:See https://github.com/sailplatform/SAIL-Manual/wiki/Writeup-HOWTO
+       adding google forms: https://github.com/CloudComputingCourse/writeups/wiki/Inserting-a-research-survey-in-a-Sail()-1.5-course
+  Dockerfile:
+    -src: Dockerfile
+    -howto: |
+        Run "docker build" and push the image to ope-infra container (talk to research team)
+  ##################
+  # steps a student needs to take to complete the project, task by task
+  ##################
+  tasks:
+    task:
+      -title: SQL schema and queries for employee salary reports
+      -description: |
+      Students need to -
+      1. Design a table combining all rows from two tables.
+      2. Implement a query to return first_name, last_name and date ranges for each employee with a salary greater than given threshold.
+      code_skeleton:
+        -src: tasks/task1.ipynb
+      reference_solution:
+        -src: reference_solutions/task1/
+      grader:
+        -src: grader/taskTest.py
+        -summary: The local grader will execute student's sql query with explain format and the query itself and save the results in explain.json and result file. The local grader calls testTask with task specific tag, which will call the ope-grader.jar specifying the actual task to grade.
+        states:
+          state: There are multiple sub tests within each task and the ope-grader will provide relevant feedback for failed tests. The feedback will provide the hints by showing the reference answer and student answer.
+          state: Passed
+    task:
+      -title: SQL schema and queries for employee salary reports
+      -description: |
+      Students need to -
+      1. Design a table combining all rows from two tables.
+      2. Implement a query to search for employess with given title in certain departments.
+      code_skeleton:
+        -src: tasks/task2.ipynb
+      reference_solution:
+        -src: reference_solutions/task2/
+      grader:
+        -src: grader/taskTest.py
+        -summary: The local grader will execute student's sql query with explain format and the query itself and save the results in explain.json and result file. The local grader calls testTask with task specific tag, which will call the ope-grader.jar specifying the actual task to grade.
+        states:
+          state: There are multiple sub tests within each task and the ope-grader will provide relevant feedback for failed tests. The feedback will provide the hints by showing the reference answer and student answer.
+          state: Passed
+    task:
+      -title: SQL schema and queries for employee salary reports
+      -description: |
+      Students need to -
+      1. Design a table combining all rows from two tables.
+      2. Implement a query to return average salary of employees in each department.
+      code_skeleton:
+        -src: tasks/task3.ipynb
+      reference_solution:
+        -src: reference_solutions/task3/
+      grader:
+        -src: grader/taskTest.py
+        -summary: The local grader will execute student's sql query with explain format and the query itself and save the results in explain.json and result file. The local grader calls testTask with task specific tag, which will call the ope-grader.jar specifying the actual task to grade.
+        states:
+          state: There are multiple sub tests within each task and the ope-grader will provide relevant feedback for failed tests. The feedback will provide the hints by showing the reference answer and student answer.
+          state: Passed

@@ -1,0 +1,41 @@
+{
+  "query_block": {
+    "select_id": 1,
+    "cost_info": {
+      "query_cost": "857.35"
+    },
+    "table": {
+      "table_name": "task2",
+      "access_type": "ref",
+      "possible_keys": [
+        "comp"
+      ],
+      "key": "comp",
+      "used_key_parts": [
+        "dept_name",
+        "title"
+      ],
+      "key_length": "364",
+      "ref": [
+        "const",
+        "const"
+      ],
+      "rows_examined_per_scan": 2027,
+      "rows_produced_per_join": 2027,
+      "filtered": "100.00",
+      "cost_info": {
+        "read_cost": "654.66",
+        "eval_cost": "202.70",
+        "prefix_cost": "857.36",
+        "data_read_per_join": "1M"
+      },
+      "used_columns": [
+        "emp_no",
+        "first_name",
+        "last_name",
+        "dept_name",
+        "title"
+      ]
+    }
+  }
+}
