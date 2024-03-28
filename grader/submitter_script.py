@@ -4,7 +4,7 @@ from operator import itemgetter
 from test_utility import write_result
 
 # Submission Specific Config
-LMS_NAME = "sail"
+LMS_NAME = "sail2"
 PROJECT_ID = "ope-phase-2"
 
 TASK_ID = "mysql-ope-task"
