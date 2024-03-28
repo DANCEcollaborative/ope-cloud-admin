@@ -23,6 +23,7 @@ class LocalGradingService(grading_pb2_grpc.GraderServicer):
     self.localGrader = local_grader.LocalGrader()
     self.ope_session_name = os.getenv("OPE_SESSION_NAME")
     self.namespace = os.getenv("OPE_SESSION_NAMESPACE")
+    self.responseUnchanged = grading_utils.extract_task_n_content(f'./response_unchanged.ipynb', 'task0')
 
   def Grade(self, request, context):
     task = request.task
