@@ -1,5 +1,4 @@
 import grading_utils as utils
-import mysql.connector
 import taskTest
 import submitter_script
 from typing import Tuple
@@ -17,74 +16,83 @@ class LocalGrader:
   def __init__(self) -> None:
     self.feedbacks = {}
     self.test_functions = set([
-      'task1',
-      'task2',
-      'task3'])
+      'task1a',
+      'task1b',
+      'task1c',
+      'task1d',
+      'task2a',
+      'task2b',
+      'task2c',
+      'task2d',
+      'task3a',
+      'task3b',
+      'task3c',
+      'task3d'])
     self.result = {
       task_tag : 0
       for task_tag in self.test_functions
     }
 
-    count = 120
-    while count:
-      try:
-        # create connection to mysql container
-        self.mydb = mysql.connector.connect(
-            host="127.0.0.1",
-            user="root",
-            password="CloudCC@100",
-            database="employees"
-        )
-        count = 0
-      except Exception:
-        time.sleep(5)
-        count -= 5
-    self.mydb.close()
+    # count = 120
+    # while count:
+    #   try:
+    #     # create connection to mysql container
+    #     self.mydb = mysql.connector.connect(
+    #         host="127.0.0.1",
+    #         user="root",
+    #         password="CloudCC@100",
+    #         database="employees"
+    #     )
+    #     count = 0
+    #   except Exception:
+    #     time.sleep(5)
+    #     count -= 5
+    # self.mydb.close()
 
 
-  def grade(self, sql_query:str, task: str)-> Tuple[bool, str]:
+  # def grade(self, sql_query:str, task: str)-> Tuple[bool, str]:
+  def grade(self, query_lines, task: str)-> Tuple[bool, str]:
     if task not in self.test_functions:
       return False, f"Task does not exist: {task}"
     
-    self.mydb = mysql.connector.connect(
-            host="127.0.0.1",
-            user="root",
-            password="CloudCC@100",
-            database="employees"
-    )
+    # self.mydb = mysql.connector.connect(
+    #         host="127.0.0.1",
+    #         user="root",
+    #         password="CloudCC@100",
+    #         database="employees"
+    # )
 
-    mycursor = self.mydb.cursor()
+    # mycursor = self.mydb.cursor()
 
-    explain_sql_query = f"EXPLAIN FORMAT=JSON {sql_query}"
+    # explain_sql_query = f"EXPLAIN FORMAT=JSON {sql_query}"
 
     passed = True
     # execute explain command and save
-    try:
-      mycursor.execute(explain_sql_query)
-      explain_result = mycursor.fetchall()
-      with open("explain.json", "w") as f:
-        f.write(explain_result[0][0].replace("\n", ""))
-    except Exception as e:
-      passed, feedback_message = False, f"Your Query: {sql_query}\n\nRunning sql command failed with:\n{e}"
+    # try:
+    #   mycursor.execute(explain_sql_query)
+    #   explain_result = mycursor.fetchall()
+    #   with open("explain.json", "w") as f:
+    #     f.write(explain_result[0][0].replace("\n", ""))
+    # except Exception as e:
+    #   passed, feedback_message = False, f"Your Query: {sql_query}\n\nRunning sql command failed with:\n{e}"
 
     # execute sql and save
     try:
-      mycursor.execute(sql_query)
-      sql_result = mycursor.fetchall()
+      # mycursor.execute(sql_query)
+      # sql_result = mycursor.fetchall()
+      #
+      # result = []
+      # for res in sql_result:
+      #   res = [str(r) for r in res]
+      #   result.append("{}\n".format("\t".join(res)))
 
-      result = []
-      for res in sql_result:
-        res = [str(r) for r in res]
-        result.append("{}\n".format("\t".join(res)))
+      result = [query_lines + "\nTEMP result"]
 
       with open("result", "w") as f:
         f.writelines(result)
 
     except Exception as e:
-      passed, feedback_message = False, f"Your Query: {sql_query}\n\nRunning sql command failed with:\n{e}"
-    
-    mycursor.close()
-    self.mydb.close()
+      passed, feedback_message = False, f"local_grader.grade() failed with:\n{e}"
 
     if passed:
       feedback_message = taskTest.test(task)
@@ -110,7 +118,7 @@ class LocalGrader:
 if __name__ == '__main__':
   grader = LocalGrader()
   for task_tag in grader.test_function_map.keys():
-    task_code = utils.extract_task_n_code(f'../tasks/{task_tag}.ipynb', task_tag)
+    task_code = utils.extract_task_n_content(f'../tasks/{task_tag}.ipynb', task_tag)
     task_fn = utils.string_to_function(task_code, task_tag)
     passed, task_feedback = grader.grade(task_tag, task_fn)
     print(task_feedback)
