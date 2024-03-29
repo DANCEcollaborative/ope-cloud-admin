@@ -124,16 +124,12 @@ class LocalGradingService():
 
 
 def grade():
-    responseUnchanged = grading_utils.extract_task_n_content(f'./response_unchanged.ipynb', 'task0')
+    responseUnchanged = grading_utils.extract_response_content(f'./response_unchanged.ipynb', 'task0')
     print("responseUnchanged: \n" + responseUnchanged + "\n")
-    task = 'task1a'
+    task = 'task1a-edited'
     # logger.debug(f'[DEBUG][LocalGradingService]: Call grade {task}')
-    response = grading_utils.extract_task_n_content(f'../tasks/task1a.ipynb', task)
-    print("tasK " + task + ": " + response + "\n")
-
-    pattern = r'(.*)'
-    query_lines = re.findall(pattern, response, re.DOTALL)
-    # logger.debug(f"[DEBUG][LocalGradingService]: query_lines: {query_lines}")
+    response = grading_utils.extract_response_content(f'../tasks/task1a-edited.ipynb', task)
+    print("response " + task + ": \n" + response + "\n")
 
     if True:
         pass
@@ -142,7 +138,7 @@ def grade():
     else:
 
         pass_task = False
-        feedback = f"grading_server.Grade: {query_lines}\n\nCOULD NOT GRADE"
+        feedback = f"grading_server.Grade: {response}\n\nCOULD NOT GRADE"
 
         if pass_task:
             # send response to bot and students

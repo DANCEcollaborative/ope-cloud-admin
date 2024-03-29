@@ -54,38 +54,9 @@ class LocalGrader:
   def grade(self, query_lines, task: str)-> Tuple[bool, str]:
     if task not in self.test_functions:
       return False, f"Task does not exist: {task}"
-    
-    # self.mydb = mysql.connector.connect(
-    #         host="127.0.0.1",
-    #         user="root",
-    #         password="CloudCC@100",
-    #         database="employees"
-    # )
-
-    # mycursor = self.mydb.cursor()
-
-    # explain_sql_query = f"EXPLAIN FORMAT=JSON {sql_query}"
-
     passed = True
-    # execute explain command and save
-    # try:
-    #   mycursor.execute(explain_sql_query)
-    #   explain_result = mycursor.fetchall()
-    #   with open("explain.json", "w") as f:
-    #     f.write(explain_result[0][0].replace("\n", ""))
-    # except Exception as e:
-    #   passed, feedback_message = False, f"Your Query: {sql_query}\n\nRunning sql command failed with:\n{e}"
 
-    # execute sql and save
     try:
-      # mycursor.execute(sql_query)
-      # sql_result = mycursor.fetchall()
-      #
-      # result = []
-      # for res in sql_result:
-      #   res = [str(r) for r in res]
-      #   result.append("{}\n".format("\t".join(res)))
-
       result = [query_lines + "\nTEMP result"]
 
       with open("result", "w") as f:

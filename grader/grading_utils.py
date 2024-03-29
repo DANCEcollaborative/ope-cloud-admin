@@ -11,7 +11,7 @@ def is_task_n(task: str):
     return cell['metadata']['tags'][0] == task
   return is_target_task
 
-def extract_task_n_content(nbPath:str, taskTag: str) -> str:
+def extract_response_content(nbPath:str, taskTag: str) -> str:
   lines = []
   is_target_task = is_task_n(taskTag)
   with open(nbPath) as f:
