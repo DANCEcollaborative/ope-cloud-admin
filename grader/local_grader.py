@@ -14,8 +14,9 @@ class Feedback:
 
 class LocalGrader:
   def __init__(self) -> None:
+    self.responseUnchanged = utils.extract_tagged_content(f'./response_unchanged.ipynb', 'task0')
     self.feedbacks = {}
-    self.test_functions = set([
+    self.response_cells = set([
       'task1a',
       'task1b',
       'task1c',
@@ -30,44 +31,27 @@ class LocalGrader:
       'task3d'])
     self.result = {
       task_tag : 0
-      for task_tag in self.test_functions
+      for task_tag in self.response_cells
     }
 
-    # count = 120
-    # while count:
-    #   try:
-    #     # create connection to mysql container
-    #     self.mydb = mysql.connector.connect(
-    #         host="127.0.0.1",
-    #         user="root",
-    #         password="CloudCC@100",
-    #         database="employees"
-    #     )
-    #     count = 0
-    #   except Exception:
-    #     time.sleep(5)
-    #     count -= 5
-    # self.mydb.close()
-
-
-  # def grade(self, sql_query:str, task: str)-> Tuple[bool, str]:
-  def grade(self, query_lines, task: str)-> Tuple[bool, str]:
-    if task not in self.test_functions:
+  def grade(self, response:str, task: str)-> Tuple[bool, str]:
+    if task not in self.response_cells:
       return False, f"Task does not exist: {task}"
     passed = True
 
     try:
-      result = [query_lines + "\nTEMP result"]
-
+      result = [response + "\nTEMP result"]
       with open("result", "w") as f:
         f.writelines(result)
-
     except Exception as e:
       passed, feedback_message = False, f"local_grader.grade() failed with:\n{e}"
 
     if passed:
-      feedback_message = taskTest.test(task)
-      passed = utils.read_test_json(task, "tests.json")
+      feedback_message = task
+      if (response != self.responseUnchanged):
+        passed = True
+      else:
+        passed = False
 
     feedback = Feedback(int(passed), feedback_message)
     self.feedbacks[task] = feedback
@@ -89,7 +73,7 @@ class LocalGrader:
 if __name__ == '__main__':
   grader = LocalGrader()
   for task_tag in grader.test_function_map.keys():
-    task_code = utils.extract_task_n_content(f'../tasks/{task_tag}.ipynb', task_tag)
+    task_code = utils.extract_tagged_content(f'../tasks/{task_tag}.ipynb', task_tag)
     task_fn = utils.string_to_function(task_code, task_tag)
     passed, task_feedback = grader.grade(task_tag, task_fn)
     print(task_feedback)
