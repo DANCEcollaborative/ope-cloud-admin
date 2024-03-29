@@ -7,10 +7,11 @@ def is_task_n(task: str):
       return False
     if len(cell['metadata']['tags']) <= 0:
       return False
-    return cell['cell_type'] == 'code' and cell['metadata']['tags'][0] == task
+    # return cell['cell_type'] == 'code' and cell['metadata']['tags'][0] == task
+    return cell['metadata']['tags'][0] == task
   return is_target_task
 
-def extract_task_n_code(nbPath:str, taskTag: str) -> str:
+def extract_tagged_content(nbPath:str, taskTag: str) -> str:
   lines = []
   is_target_task = is_task_n(taskTag)
   with open(nbPath) as f:
@@ -18,8 +19,8 @@ def extract_task_n_code(nbPath:str, taskTag: str) -> str:
     for cell in nb.cells:
       if is_target_task(cell):
         lines.append(cell['source'])
-  code = '\n'.join(lines)
-  return code
+  response = '\n'.join(lines)
+  return response
 
 def string_to_function(code: str, funcName: str):
   local_vars = {}

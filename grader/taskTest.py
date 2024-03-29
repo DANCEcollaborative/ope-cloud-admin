@@ -9,7 +9,7 @@ def test(task:str):
     file = tarfile.open(name_of_file,"w:gz")
     file.add("explain.json")
     file.add("result")
-    file.add(f"{task}.sql")
+    file.add(f"{task}")
     file.close()
 
     shutil.rmtree('grader/', ignore_errors=True)
