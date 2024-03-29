@@ -59,7 +59,10 @@ class LocalGrader:
       passed, feedback_message = False, f"local_grader.grade() failed with:\n{e}"
 
     if passed:
-      feedback_message = task
+      # feedback_message = task
+      feedback_message = taskTest.test(task)
+      passed = utils.read_test_json(task, "tests.json")
+
       if (response != self.responseUnchanged):
         passed = True
       else:
