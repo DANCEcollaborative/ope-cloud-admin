@@ -1,17 +1,17 @@
 import requests, json, os
 import tarfile
 from operator import itemgetter
-from test_utility import write_encrypted_result
+from test_utility import write_result
 
 # Submission Specific Config
 LMS_NAME = "sail2"
-PROJECT_ID = "ope-cloud-admin"    						// WHAT SHOULD VALUE BE? 
-PROJECT_LEARN_ID = "ope-learn-autoscalin-mpfs4jua"    	// WHAT SHOULD VALUE BE?
-TASK_ID = "ope-cloud-admin"    							// WHAT SHOULD VALUE BE? 
-SECRET_KEY = "Md7FnrQTwY4rEqxSSCrU28"    				// WHAT SHOULD VALUE BE? 
+PROJECT_ID = "ope-cloud-admin"
+
+TASK_ID = "mysql-ope-task"
+SECRET_KEY = "Md7FnrQTwY4rEqxSSCrU28"
 ARTIFACT_VERSION = "v1"
-DURATION = 300    										// WHAT SHOULD VALUE BE? 
-COURSE_TYPE = "cloud-admin"    							// WHAT SHOULD VALUE BE? 
+DURATION = 300
+COURSE_TYPE = "cloud-developer"
 
 STUDENT_DNS = requests.get("https://ipinfo.io/ip").text
 AGS_DNS = "autograding.sailplatform.org"
@@ -40,7 +40,7 @@ def submit(username, password, result):
 	tar_filename = f"{username}.tar.gz"
 
 	# generate the result json file
-	write_encrypted_result(result, RESULT_FILENAME)
+	write_result(result, RESULT_FILENAME)
 
 	# add the result json file and workspace notebook
 	# to a submission tar
