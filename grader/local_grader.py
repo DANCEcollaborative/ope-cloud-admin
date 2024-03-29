@@ -18,17 +18,29 @@ class LocalGrader:
     self.feedbacks = {}
     self.response_cells = set([
       'task1a',
+      'task1a2',
       'task1b',
+      'task1b2',
       'task1c',
+      'task1c2',
       'task1d',
+      'task1d2',
       'task2a',
+      'task2a2',
       'task2b',
+      'task2b2',
       'task2c',
+      'task2c2',
       'task2d',
+      'task2d2',
       'task3a',
+      'task3a2',
       'task3b',
+      'task3b2',
       'task3c',
-      'task3d'])
+      'task3c2',
+      'task3d',
+      'task3d2'])
     self.result = {
       task_tag : 0
       for task_tag in self.response_cells

@@ -45,14 +45,14 @@ class LocalGradingService(grading_pb2_grpc.GraderServicer):
          submission_password: SAIL() password
       """
       # retrieve post quiz token
-      moduleSlug = "ope-phase-2"
-      url = f"https://theproject.zone/api/get_tokens/?key=vXuGzlO3a89BE76pcvXRivaeHjZNK9sxftrdejmbqHGm56c1nMkc30cg2AyrDmsu&submission_password={submission_password}&course=f23-15619&module={moduleSlug}&entity={submission_username}"
-      response = requests.get(url)
-      tokenJson = json.loads(response.content.decode('utf-8'))
-      tokens = tokenJson["tokens"]
-      for tokObj in tokens:
-        if tokObj["descriptive_name"] == "post_quiz_token":
-          return tokObj["token"]
+      # moduleSlug = "ope-learn-autoscalin-mpfs4jua"
+      # url = f"https://theproject.zone/api/get_tokens/?key=vXuGzlO3a89BE76pcvXRivaeHjZNK9sxftrdejmbqHGm56c1nMkc30cg2AyrDmsu&submission_password={submission_password}&course=cloud-admi-learn-87mc1pjd&module={moduleSlug}&entity={submission_username}"
+      # response = requests.get(url)
+      # tokenJson = json.loads(response.content.decode('utf-8'))
+      # tokens = tokenJson["tokens"]
+      # for tokObj in tokens:
+      #   if tokObj["descriptive_name"] == "post_quiz_token":
+      #     return tokObj["token"]
       return ""
 
   def Submit(self, request, context):
