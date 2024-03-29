@@ -14,7 +14,6 @@ import utils
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-
 class LocalGradingService(grading_pb2_grpc.GraderServicer):
   def __init__(self) -> None:
     super().__init__()
@@ -27,37 +26,10 @@ class LocalGradingService(grading_pb2_grpc.GraderServicer):
   def Grade(self, request, context):
     task = request.task
     logger.debug(f'[DEBUG][LocalGradingService]: Call Grade {task}')
-    code = grading_utils.extract_task_n_code(f'workspace/workspace.ipynb', task)
+    response = grading_utils.extract_tagged_content(f'workspace/workspace.ipynb', task)
 
-    # students write sql query within multi-line comment
-    # extract the sql query as a string
-    pattern = r'(\'\'\'(.*?)\'\'\'|\"\"\"(.*?)\"\"\")'
-    query_lines = re.findall(pattern, code, re.DOTALL)
-    sql_query = []
-    # the sql query can be written in multiple lines
-    # combine all lines into one command for execution
-    for line in query_lines:
-      sql_query.append(line[1].strip() if line[1] else line[2].strip())   
-    sql_query = "".join(sql_query).replace("\n", "").replace("\\", "")
-    logger.debug(f"[DEBUG][LocalGradingService]: sql query: {sql_query}")
-    
-    # sanity check that command starts with select
-    if sql_query.lower().startswith("select"):
-        
-        # ensure there is a semi-colon at the end of command
-        if not sql_query.endswith(";"):
-          sql_query += ";"
-        
-        # save command to file
-        grading_utils.save_code(sql_query, "{}.sql".format(task))
-
-        pass_task, feedback = self.localGrader.grade(sql_query, task)
-        logger.debug(f'[DEBUG][LocalGradingService]: result is {pass_task}. Feedback is {feedback}')
-    else:
-        # if there is an issue parsing sql command send
-        # feedback that there is invalid sql command
-        pass_task = False
-        feedback = f"Found: {sql_query}\n\nCouldn't find valid SQL SELECT statement!"
+    pass_task, feedback = self.localGrader.grade(response, task)
+    logger.debug(f'[DEBUG][LocalGradingService]: result is {pass_task}. Feedback is {feedback}')
 
     if pass_task:
       # send response to bot and students
@@ -73,14 +45,14 @@ class LocalGradingService(grading_pb2_grpc.GraderServicer):
          submission_password: SAIL() password
       """
       # retrieve post quiz token
-      moduleSlug = "ope-phase-2"
-      url = f"https://theproject.zone/api/get_tokens/?key=vXuGzlO3a89BE76pcvXRivaeHjZNK9sxftrdejmbqHGm56c1nMkc30cg2AyrDmsu&submission_password={submission_password}&course=f23-15619&module={moduleSlug}&entity={submission_username}"
-      response = requests.get(url)
-      tokenJson = json.loads(response.content.decode('utf-8'))
-      tokens = tokenJson["tokens"]
-      for tokObj in tokens:
-        if tokObj["descriptive_name"] == "post_quiz_token":
-          return tokObj["token"]
+      # moduleSlug = "ope-learn-autoscalin-mpfs4jua"
+      # url = f"https://theproject.zone/api/get_tokens/?key=vXuGzlO3a89BE76pcvXRivaeHjZNK9sxftrdejmbqHGm56c1nMkc30cg2AyrDmsu&submission_password={submission_password}&course=cloud-admi-learn-87mc1pjd&module={moduleSlug}&entity={submission_username}"
+      # response = requests.get(url)
+      # tokenJson = json.loads(response.content.decode('utf-8'))
+      # tokens = tokenJson["tokens"]
+      # for tokObj in tokens:
+      #   if tokObj["descriptive_name"] == "post_quiz_token":
+      #     return tokObj["token"]
       return ""
 
   def Submit(self, request, context):

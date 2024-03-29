@@ -4,8 +4,8 @@ from operator import itemgetter
 from test_utility import write_result
 
 # Submission Specific Config
-LMS_NAME = "sail"
-PROJECT_ID = "ope-phase-2"
+LMS_NAME = "sail2"
+PROJECT_ID = "ope-cloud-admin"
 
 TASK_ID = "mysql-ope-task"
 SECRET_KEY = "Md7FnrQTwY4rEqxSSCrU28"
@@ -18,7 +18,8 @@ AGS_DNS = "autograding.sailplatform.org"
 SIGNATURE = "1K9SaGliHwthRgeOi12hUdCUwAPmN"
 
 NOTEBOOK_FILENAME = "./workspace/workspace.ipynb"
-RESULT_FILENAME = "task_result.json"
+# RESULT_FILENAME = "task_result.json"
+RESULT_FILENAME = "result.json"
 
 
 def submit(username, password, result):
@@ -44,7 +45,7 @@ def submit(username, password, result):
 	# add the result json file and workspace notebook
 	# to a submission tar
 	with tarfile.open(tar_filename, "w:gz") as tar:
-		tar.add('solutions/', recursive=True)
+		# tar.add('solutions/', recursive=True)
 		tar.add(NOTEBOOK_FILENAME)
 		tar.add(RESULT_FILENAME)
 
