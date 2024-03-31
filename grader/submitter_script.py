@@ -11,7 +11,7 @@ TASK_ID = "mysql-ope-task"
 SECRET_KEY = "Md7FnrQTwY4rEqxSSCrU28"
 ARTIFACT_VERSION = "v1"
 DURATION = 300
-COURSE_TYPE = "cloud-developer"
+# COURSE_TYPE = "cloud-developer"
 
 STUDENT_DNS = requests.get("https://ipinfo.io/ip").text
 AGS_DNS = "autograding.sailplatform.org"
@@ -34,7 +34,7 @@ def submit(username, password, result):
 		"secretKey" : SECRET_KEY,
 		"duration" : DURATION,
 		"lmsName" : LMS_NAME,
-		"courseType" : COURSE_TYPE,
+		# "courseType" : COURSE_TYPE,
 		"artifactVersion" : ARTIFACT_VERSION
 	}
 	tar_filename = f"{username}.tar.gz"
