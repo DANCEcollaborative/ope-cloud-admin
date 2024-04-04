@@ -5,17 +5,16 @@ from test_utility import write_result
 
 # Submission Specific Config
 LMS_NAME = "sail2"
-PROJECT_ID = "ope-cloud-admin"
-
-TASK_ID = " ope-learn-autoscalin-mpfs4jua"
-SECRET_KEY = "Md7FnrQTwY4rEqxSSCrU28"
-ARTIFACT_VERSION = "v1"
-DURATION = 300
+SECRET_KEY = "9113513e079a4c64"
+PROJECT_ID = "ope-author-autoscalin-fl6rpghr"
+TASK_ID = "a570b0c6-a097-433f-9d07-0a66ea6676d6"
 COURSE_TYPE = "cloud-developer"
-
-STUDENT_DNS = requests.get("https://ipinfo.io/ip").text
+DURATION = 300
 AGS_DNS = "autograding.sailplatform.org"
 SIGNATURE = "1K9SaGliHwthRgeOi12hUdCUwAPmN"
+
+ARTIFACT_VERSION = "v1"
+STUDENT_DNS = requests.get("https://ipinfo.io/ip").text
 
 NOTEBOOK_FILENAME = "./workspace/workspace.ipynb"
 # RESULT_FILENAME = "task_result.json"
