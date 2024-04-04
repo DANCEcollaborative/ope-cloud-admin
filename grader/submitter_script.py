@@ -46,7 +46,7 @@ def submit(username, password, result):
 	with tarfile.open(tar_filename, "w:gz") as tar:
 		# tar.add('solutions/', recursive=True)
 		tar.add(NOTEBOOK_FILENAME)
-		tar.add(RESULT_FILENAME)
+		# tar.add(RESULT_FILENAME)
 
 	# submit the tar to AGS
 	with open(tar_filename, "rb") as tar:
